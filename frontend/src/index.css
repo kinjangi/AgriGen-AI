@@ -1,0 +1,143 @@
+/* 
+  AgriGen AI — Human-Crafted Earthy Agri-Tech Design System
+  Palette: Warm Ivory (#F7F5F0), Deep Forest Green (#2D4A2D), Terracotta (#C97B3D), Muted Charcoal (#1C1B18)
+  Typography: Plus Jakarta Sans (Headings), Inter (Body)
+*/
+
+:root {
+  /* Color Tokens - Light Theme (Default) */
+  --bg-app: #F7F5F0;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F0ECE3;
+  --bg-input: #FAFAFA;
+  
+  --primary: #2D4A2D;
+  --primary-hover: #1F361F;
+  --primary-light: #EBF2EB;
+  --primary-border: #BCD1BC;
+  
+  --accent: #C97B3D;
+  --accent-hover: #AA6128;
+  --accent-light: #FDF5ED;
+
+  --text-main: #1C1B18;
+  --text-muted: #66645E;
+  --text-tertiary: #96938B;
+  
+  --border-color: #E3E0D8;
+  --border-subtle: #ECE9E1;
+  --border-hover: #C5C1B6;
+  
+  --status-green-bg: #E8F5E9;
+  --status-green-text: #1B5E20;
+  --status-green-dot: #2E7D32;
+  
+  --status-amber-bg: #FFF8E1;
+  --status-amber-text: #B78103;
+  --status-amber-dot: #F57F17;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  
+  --shadow-sm: 0 1px 2px rgba(28, 27, 24, 0.04);
+  --shadow-md: 0 4px 12px rgba(28, 27, 24, 0.05), 0 1px 3px rgba(28, 27, 24, 0.03);
+  --shadow-lg: 0 12px 32px rgba(28, 27, 24, 0.08), 0 2px 6px rgba(28, 27, 24, 0.04);
+
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Warm Dark Theme Variant */
+[data-theme='dark'] {
+  --bg-app: #121210;
+  --bg-card: #1C1B18;
+  --bg-subtle: #272521;
+  --bg-input: #23221E;
+  
+  --primary: #8BAA6C;
+  --primary-hover: #A0C27E;
+  --primary-light: #222C1A;
+  --primary-border: #3D4F2E;
+  
+  --accent: #E09F56;
+  --accent-hover: #F2B36D;
+  --accent-light: #332616;
+
+  --text-main: #F4F2ED;
+  --text-muted: #A3A097;
+  --text-tertiary: #706D65;
+  
+  --border-color: #312F2A;
+  --border-subtle: #282622;
+  --border-hover: #4A4740;
+  
+  --status-green-bg: #1B2E1E;
+  --status-green-text: #81C784;
+  --status-green-dot: #66BB6A;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-main);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+button {
+  font-family: var(--font-heading);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+}
+
+/* Utility Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
