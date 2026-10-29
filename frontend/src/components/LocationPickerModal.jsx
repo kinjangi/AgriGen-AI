@@ -67,7 +67,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
           setLon(roundedLon);
 
           // Reverse geocode new pin location
-          fetch(`http://localhost:8000/api/v1/telemetry/reverse_geocode?lat=${roundedLat}&lon=${roundedLon}`)
+          fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${roundedLat}&lon=${roundedLon}`)
             .then(res => res.json())
             .then(data => {
               if (data) {
@@ -109,7 +109,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
   const handleSearch = (query) => {
     setSearchQuery(query);
     setIsSearching(true);
-    fetch(`http://localhost:8000/api/v1/telemetry/search_location?query=${encodeURIComponent(query)}`)
+    fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/search_location?query=${encodeURIComponent(query)}`)
       .then(res => res.json())
       .then(data => {
         setSearchResults(Array.isArray(data) ? data : []);
@@ -149,7 +149,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
         setLat(userLat);
         setLon(userLon);
 
-        fetch(`http://localhost:8000/api/v1/telemetry/reverse_geocode?lat=${userLat}&lon=${userLon}`)
+        fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${userLat}&lon=${userLon}`)
           .then(res => res.json())
           .then(data => {
             if (data) {
