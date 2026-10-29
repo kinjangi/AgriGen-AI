@@ -221,7 +221,7 @@ function App() {
         const lon = parseFloat(position.coords.longitude.toFixed(4));
 
         try {
-          const res = await fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/overview?lat=${lat}&lon=${lon}&crop=${activeField.crop}&field_name=${encodeURIComponent('Live GPS Location')}`);
+          const res = await fetch(`https://agrigen-ai.onrender.com/api/v1/telemetry/overview?lat=${lat}&lon=${lon}&crop=${activeField.crop}&field_name=${encodeURIComponent('Live GPS Location')}`);
           if (res.ok) {
             const data = await res.json();
             const locationName = data.location?.name || `GPS (${lat}, ${lon})`;
@@ -451,7 +451,7 @@ function App() {
 
   // Backend Health Check & Telemetry Polling
   useEffect(() => {
-    fetch('http://agrigen-ai.onrender.com/api/v1/health')
+    fetch('https://agrigen-ai.onrender.com/api/v1/health')
       .then((res) => res.json())
       .then((data) => setHealth(data))
       .catch((err) => console.error("Health check error: ", err));
@@ -603,7 +603,7 @@ function App() {
     setCurrentlyPlayingIdx(msgIdx);
 
     try {
-      const res = await fetch('http://agrigen-ai.onrender.com/api/v1/orchestrator/tts', {
+      const res = await fetch('https://agrigen-ai.onrender.com/api/v1/orchestrator/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: cleanText, language: language })
@@ -749,12 +749,12 @@ function App() {
           formData.append('files', item.file);
         });
 
-        response = await fetch('http://agrigen-ai.onrender.com/api/v1/orchestrator/chat_with_files', {
+        response = await fetch('https://agrigen-ai.onrender.com/api/v1/orchestrator/chat_with_files', {
           method: 'POST',
           body: formData,
         });
       } else {
-        response = await fetch('http://agrigen-ai.onrender.com/api/v1/orchestrator/chat', {
+        response = await fetch('https://agrigen-ai.onrender.com/api/v1/orchestrator/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -824,7 +824,7 @@ function App() {
             ? '⚠️ బ్యాకెండ్ సర్వర్ (పోర్ట్ 8000) అందుబాటులో లేదు. దయచేసి "npm run dev" లేదా సర్వర్‌ను ప్రారంభించండి.'
             : '⚠️ సేవ తాత్కాలికంగా అందుబాటులో లేదు. దయచేసి మళ్లీ ప్రయత్నించండి.')
         : (isNetworkErr
-            ? '⚠️ Cannot reach backend server at http://agrigen-ai.onrender.com. Please ensure the backend server is running (e.g. run "npm run dev").'
+            ? '⚠️ Cannot reach backend server at https://agrigen-ai.onrender.com. Please ensure the backend server is running (e.g. run "npm run dev").'
             : '⚠️ Service temporarily unavailable. Please verify your server connection.');
 
       setMessages((prev) => [

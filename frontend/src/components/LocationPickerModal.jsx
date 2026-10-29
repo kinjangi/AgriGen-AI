@@ -5,7 +5,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
   const [fieldName, setFieldName] = useState('Field #1');
   const [crop, setCrop] = useState('paddy');
   const [sensorId, setSensorId] = useState('');
-  
+
   const [locationName, setLocationName] = useState('Warangal, Telangana');
   const [district, setDistrict] = useState('Warangal');
   const [state, setState] = useState('Telangana');
@@ -53,7 +53,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
       if (window.L && !leafletMap.current) {
         const L = window.L;
         const initialMap = L.map(mapRef.current).setView([lat, lon], 12);
-        
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors'
         }).addTo(initialMap);
@@ -67,7 +67,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
           setLon(roundedLon);
 
           // Reverse geocode new pin location
-          fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${roundedLat}&lon=${roundedLon}`)
+          fetch(`https://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${roundedLat}&lon=${roundedLon}`)
             .then(res => res.json())
             .then(data => {
               if (data) {
@@ -109,7 +109,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
   const handleSearch = (query) => {
     setSearchQuery(query);
     setIsSearching(true);
-    fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/search_location?query=${encodeURIComponent(query)}`)
+    fetch(`https://agrigen-ai.onrender.com/api/v1/telemetry/search_location?query=${encodeURIComponent(query)}`)
       .then(res => res.json())
       .then(data => {
         setSearchResults(Array.isArray(data) ? data : []);
@@ -149,7 +149,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
         setLat(userLat);
         setLon(userLon);
 
-        fetch(`http://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${userLat}&lon=${userLon}`)
+        fetch(`https://agrigen-ai.onrender.com/api/v1/telemetry/reverse_geocode?lat=${userLat}&lon=${userLon}`)
           .then(res => res.json())
           .then(data => {
             if (data) {
@@ -165,8 +165,8 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
         console.warn('GPS position error:', error);
         setGpsLoading(false);
         setGpsError(
-          language === 'te' 
-            ? 'GPS అనుమతి నిరాకరించబడింది. దయచేసి క్రింద ఉన్న శోధన నుండి మీ జిల్లాను ఎంచుకోండి.' 
+          language === 'te'
+            ? 'GPS అనుమతి నిరాకరించబడింది. దయచేసి క్రింద ఉన్న శోధన నుండి మీ జిల్లాను ఎంచుకోండి.'
             : 'GPS permission denied or unavailable. Please select your district/mandal manually below.'
         );
       },
@@ -206,19 +206,19 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
 
         {/* Tab Selection */}
         <div className="modal-tabs">
-          <button 
+          <button
             className={`modal-tab-btn ${activeTab === 'search' ? 'active' : ''}`}
             onClick={() => setActiveTab('search')}
           >
             🔍 {language === 'te' ? 'జిల్లా / మండలం శోధించండి' : 'Search District/Mandal'}
           </button>
-          <button 
+          <button
             className={`modal-tab-btn ${activeTab === 'gps' ? 'active' : ''}`}
             onClick={() => setActiveTab('gps')}
           >
             🎯 {language === 'te' ? 'GPS ద్వారా కనుగొనండి' : 'Detect GPS Location'}
           </button>
-          <button 
+          <button
             className={`modal-tab-btn ${activeTab === 'map' ? 'active' : ''}`}
             onClick={() => setActiveTab('map')}
           >
@@ -231,9 +231,9 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
           {activeTab === 'search' && (
             <div className="tab-pane">
               <div className="search-box-wrap">
-                <input 
-                  type="text" 
-                  className="modal-input" 
+                <input
+                  type="text"
+                  className="modal-input"
                   placeholder={language === 'te' ? "ఉదా: కొత్తగూడెం, వరంగల్, గుంటూరు..." : "e.g., Kothagudem, Warangal, Guntur, Ludhiana..."}
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
@@ -245,8 +245,8 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
                   <div className="loading-spinner-row">⏳ Searching location database...</div>
                 ) : searchResults.length > 0 ? (
                   searchResults.map((item, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className={`search-result-item ${item.lat === lat && item.lon === lon ? 'selected' : ''}`}
                       onClick={() => handleSelectLocation(item)}
                     >
@@ -317,9 +317,9 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
           <div className="form-grid">
             <div className="form-group">
               <label>{language === 'te' ? 'పొలం పేరు / లేబుల్' : 'Field Label / Name'}</label>
-              <input 
-                type="text" 
-                className="modal-input" 
+              <input
+                type="text"
+                className="modal-input"
                 value={fieldName}
                 onChange={(e) => setFieldName(e.target.value)}
                 placeholder="e.g. Field #1 (North Plot)"
@@ -329,7 +329,7 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
 
             <div className="form-group">
               <label>{language === 'te' ? 'ముఖ్యమైన పంట రకం' : 'Primary Crop Cultivated'}</label>
-              <select 
+              <select
                 className="modal-select"
                 value={crop}
                 onChange={(e) => setCrop(e.target.value)}
@@ -349,8 +349,8 @@ export default function LocationPickerModal({ isOpen, onClose, onSaveField, edit
             <label>
               📡 {language === 'te' ? 'IoT హార్డ్‌వేర్ సెన్సార్ ఐడీ (ఐచ్ఛికం)' : 'Link IoT Physical Sensor Hardware ID (Optional)'}
             </label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="modal-input"
               value={sensorId}
               onChange={(e) => setSensorId(e.target.value)}
