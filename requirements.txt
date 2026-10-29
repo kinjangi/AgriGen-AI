@@ -8,6 +8,7 @@ uvicorn
 python-multipart
 passlib[bcrypt]
 PyJWT
+pypdf
 httpx
 torch
 scikit-learn
